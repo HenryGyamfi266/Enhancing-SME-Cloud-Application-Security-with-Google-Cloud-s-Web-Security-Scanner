@@ -1,0 +1,62 @@
+**Task1**
+In this project, I deployed a sample Hello World application to run Security Scanner on using the steps below:
+
+1. I run the command below in Cloud Shell to clone the Hello World sample app repository:
+# gsutil -m cp -r gs://spls/gsp067/python-docs-samples .
+
+2. Then navigated to the directory that contains the sample code:
+# cd python-docs-samples/appengine/standard_python3/hello_world
+
+3. I then changed the python version with the sed command:
+# sed -i "s/python37/python39/g" app.yaml
+
+4. I run the below command and made sure to add (itsdangerous==2.0.1, Jinja2==3.0.3 and werkzeug==2.0.1) in the requirements.txt file:
+# nano requirements.txt
+
+5. I saved the file (press Ctrl+O then Enter) and exit nano (press Ctrl+X).
+
+**Task 2** - Testing Apps
+1. In order to install Prerequisites for the Python environment, I run the code below: 
+# sudo apt install python3.11-venv -y
+# python3 -m venv create myvenv
+# source myvenv/bin/activate
+
+2. From within the hello_world directory where the app's app.yaml configuration file is located, I start the local development server with the following command:
+# dev_appserver.py app.yaml
+
+3. The local development server is now running and listening for requests on port 8080. Click on the web preview button in Cloud Shell, and select Preview on port 8080 to see it.
+To stop the app and return to the command line, I typed Ctrl+c
+
+**Task3**-Deploy App
+1. Deploy your app to App Engine by running the following command from within the root directory of your application (hello_world):
+# gcloud app deploy
+
+2. I was asked to select a region. Choose the number for one that is near where you are.
+
+3. After the app is created,I Clicked Y to continue.
+
+Deployment of your app will then begin.
+
+**Task4**-View App
+1. To launch the app in my browser, I run the following command:
+# gcloud app browse
+
+There will be a link in Cloud Shell that I used to view the app 
+This is the URL I'll scan for vulnerabilities
+
+**Task5**-Scanning App
+The scan does not run immediately, but is queued for later execution; it can take hours before the scan executes, depending on current load. 
+
+1. I start by going to Navigation menu > APIs & Services > Library on the google cloud console
+
+2. In Search for APIs & Services type Web Security Scanner.
+
+3. I selected the Web Security Scanner API then Clicked Enable to enable the API.
+
+4. From the Navigation menu select Security > Web Security Scanner.
+
+5. Click New Scan. Under Starting URL 1, I entered the URL of the application I want to scan. In this case I will use the URL i saw when i viewed the app in task4
+
+6. Then I clicked on Save to create the scan and clicked Run to start scanning.
+
+It took about 5 minutes to see the results of the scan
